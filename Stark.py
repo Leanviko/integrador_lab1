@@ -16,9 +16,11 @@ def altura_maxima(lista_personajes):
     alt_max = 0
     posicion_altura_maxima = 0
     for i in range(len(lista_personajes)):
+
         if float(lista_personajes[i]['altura']) > alt_max:
             alt_max = float(lista_personajes[i]['altura'])
             posicion_altura_maxima= i
+
     return posicion_altura_maxima
 
 #punto D
@@ -76,12 +78,10 @@ def menos_pesado(lista_personajes):
             posicion_peso_min = i
     return posicion_peso_minimo
 
-pos_liviano = menos_pesado(lista_personajes)
-print(f"Peso minimo: {lista_personajes[pos_liviano]['peso']}")
 
 
 while True:
-    print(f"Base de datos Stark.\n")
+    print("Base de datos Stark.\n")
     print("1- Nombres de pila.")
     print("2- Nombres y altura.")
     print("3- Altura Maxima.")
@@ -104,18 +104,22 @@ match opcion:
         lista_nombres_altura(lista_personajes)
     case 3:
         posicion_max = altura_maxima(lista_personajes)
-        print(f"Altura máxima: {lista_personajes[posicion_max]['altura']}")
+        MAXIMO = lista_personajes[posicion_max]['altura']
+        print(f"Altura máxima: {MAXIMO}")
     case 4:
         posicion_min = altura_minima(lista_personajes)
-        print(f"Altura minima: {lista_personajes[posicion_min]['altura']}")
+        MINIMO = lista_personajes[posicion_min]['altura']
+        print(f"Altura minima: {MINIMO}")
     case 5:
         promedio_altura(lista_personajes)
     case 6:
         posicion_max = altura_maxima(lista_personajes)
-        print(f"Nombre superheroe con altura maxima: {lista_personajes[posicion_max]['nombre']}")
+        NOMBRE_MAXIMO = lista_personajes[posicion_max]['nombre']
+        print(f"Nombre superheroe con altura maxima: {NOMBRE_MAXIMO}")
     case 7:
         posicion_min = altura_minima(lista_personajes)
-        print(f"Nombre superheroe con altura minima: {lista_personajes[posicion_min]['nombre']}")
+        NOMBRE_MINIMO = lista_personajes[posicion_min]['nombre']
+        print(f"Nombre superheroe con altura minima: {NOMBRE_MINIMO}")
     case 8:
         pos_pesado = mas_pesado(lista_personajes)
         print(f"El más pesado es {lista_personajes[pos_pesado]['nombre']} con un peso de {lista_personajes[pos_pesado]['peso']}")
