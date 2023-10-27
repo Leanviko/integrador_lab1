@@ -1,3 +1,4 @@
+from os import system
 from data_stark import lista_personajes
 
 #punto A
@@ -133,45 +134,61 @@ def promedio_por_genero(lista_personajes, genero):
 
     return promedio
 
-def colores_de_ojos(lista_personajes):
+def lista_colores_de_ojos(lista_personajes):
     lista_colores_ojos = []
     existe_color = None
     color_ojo ={}
     
     for i in range(len(lista_personajes)):
-            
             color = lista_personajes[i]['color_ojos']
-            # print(color) llegan los colores
-
+            
             if i > 0:
                 for j in range(len(lista_colores_ojos)):
                     existe_color = False
-
-                    if color == lista_colores_ojos[j]['color_ojos']:
+                    if color.lower() == lista_colores_ojos[j]['color_ojos'].lower():
                         existe_color = True
                         break
             
-            
-            print(existe_color)
-
-            
-            
             if (existe_color == False) or (i == 0):
-
                 color_ojo = {'color_ojos': color, 'cantidad' : 1}
                 lista_colores_ojos.append(color_ojo)
-                
-
             else:
                 for k in range(len(lista_colores_ojos)):
-
-                    if lista_colores_ojos[k]['color_ojos'] == color:
+                    if lista_colores_ojos[k]['color_ojos'].lower() == color.lower():
                         lista_colores_ojos[k]['cantidad'] += 1
+                        break
+
+    return lista_colores_ojos
 
 
+def lista_colores_de_pelo(lista_personajes):
+    lista_colores_pelo = []
+    existe_color = None
+    color_pelo ={}
     
-    for i in range(len(lista_colores_ojos)):
-        print(lista_colores_ojos[i])
+    for i in range(len(lista_personajes)):
+            
+            color = lista_personajes[i]['color_pelo']
+            
+            if i > 0:
+                for j in range(len(lista_colores_pelo)):
+                    existe_color = False
+                    if color.lower() == lista_colores_pelo[j]['color_pelo'].lower():
+                        existe_color = True
+                        break
+            
+            if (existe_color == False) or (i == 0):
+                color_ojo = {'color_pelo': color, 'cantidad' : 1}
+                lista_colores_pelo.append(color_ojo)
+            else:
+                for k in range(len(lista_colores_pelo)):
+                    if lista_colores_pelo[k]['color_pelo'].lower() == color.lower():
+                        lista_colores_pelo[k]['cantidad'] += 1
+                        break
+
+    return lista_colores_pelo 
+    
+    
 
 
 while True:
@@ -194,60 +211,76 @@ while True:
     print("16- Altura promedio de genero Masculino.")
     print("17- Altura promedio de genero Femenino.")
     print("18- Colores de ojos")
+    print("19- Colores de pelo")
     
     opcion = int(input("Ingrese un valor: "))
-    if opcion<=50 and opcion>=0:
-        break
+    #if opcion<=50 and opcion>=0:
+        #break
 
-print("\n")
-match opcion:
-    case 1:
-        lista_nombres(lista_personajes)
-    case 2:
-        lista_nombres_altura(lista_personajes)
-    case 3:
-        posicion_max = altura_maxima(lista_personajes)
-        MAXIMO = lista_personajes[posicion_max]['altura']
-        print(f"Altura máxima: {MAXIMO}")
-    case 4:
-        posicion_min = altura_minima(lista_personajes)
-        MINIMO = lista_personajes[posicion_min]['altura']
-        print(f"Altura minima: {MINIMO}")
-    case 5:
-        promedio_altura(lista_personajes)
-    case 6:
-        posicion_max = altura_maxima(lista_personajes)
-        NOMBRE_MAXIMO = lista_personajes[posicion_max]['nombre']
-        print(f"Nombre superheroe con altura maxima: {NOMBRE_MAXIMO}")
-    case 7:
-        posicion_min = altura_minima(lista_personajes)
-        NOMBRE_MINIMO = lista_personajes[posicion_min]['nombre']
-        print(f"Nombre superheroe con altura minima: {NOMBRE_MINIMO}")
-    case 8:
-        pos_pesado = mas_pesado(lista_personajes)
-        print(f"El más pesado es {lista_personajes[pos_pesado]['nombre']} con un peso de {lista_personajes[pos_pesado]['peso']}")
-    case 9:
-        pos_liviano = menos_pesado(lista_personajes)
-        print(f"El más liviano es {lista_personajes[pos_liviano]['nombre']} con un peso de {lista_personajes[pos_liviano]['peso']}")
-    case 10:
-        nombres_genero(lista_personajes, 'M')
-    case 11:
-        nombres_genero(lista_personajes, 'F')
-    case 12:
-        max_altura_genero(lista_personajes, 'M')
-    case 13:
-        max_altura_genero(lista_personajes, 'F')
-    case 14:
-        min_altura_genero(lista_personajes, 'M')
-    case 15:
-        min_altura_genero(lista_personajes, 'F')
-    case 16:
-        promedio = promedio_por_genero(lista_personajes,'M')
-        print(f"Altura promedio masculino {promedio}")
-    case 17:
-        promedio = promedio_por_genero(lista_personajes,'F')
-        print(f"Altura promedio femenino {promedio}")
-    case 18:
-        colores_de_ojos(lista_personajes)
+    print("\n")
+    match opcion:
+        case 1:
+            lista_nombres(lista_personajes)
+        case 2:
+            lista_nombres_altura(lista_personajes)
+        case 3:
+            posicion_max = altura_maxima(lista_personajes)
+            MAXIMO = lista_personajes[posicion_max]['altura']
+            print(f"Altura máxima: {MAXIMO}")
+        case 4:
+            posicion_min = altura_minima(lista_personajes)
+            MINIMO = lista_personajes[posicion_min]['altura']
+            print(f"Altura minima: {MINIMO}")
+        case 5:
+            promedio_altura(lista_personajes)
+        case 6:
+            posicion_max = altura_maxima(lista_personajes)
+            NOMBRE_MAXIMO = lista_personajes[posicion_max]['nombre']
+            print(f"Nombre superheroe con altura maxima: {NOMBRE_MAXIMO}")
+        case 7:
+            posicion_min = altura_minima(lista_personajes)
+            NOMBRE_MINIMO = lista_personajes[posicion_min]['nombre']
+            print(f"Nombre superheroe con altura minima: {NOMBRE_MINIMO}")
+        case 8:
+            pos_pesado = mas_pesado(lista_personajes)
+            print(f"El más pesado es {lista_personajes[pos_pesado]['nombre']} con un peso de {lista_personajes[pos_pesado]['peso']}")
+        case 9:
+            pos_liviano = menos_pesado(lista_personajes)
+            print(f"El más liviano es {lista_personajes[pos_liviano]['nombre']} con un peso de {lista_personajes[pos_liviano]['peso']}")
+        case 10:
+            nombres_genero(lista_personajes, 'M')
+        case 11:
+            nombres_genero(lista_personajes, 'F')
+        case 12:
+            max_altura_genero(lista_personajes, 'M')
+        case 13:
+            max_altura_genero(lista_personajes, 'F')
+        case 14:
+            min_altura_genero(lista_personajes, 'M')
+        case 15:
+            min_altura_genero(lista_personajes, 'F')
+        case 16:
+            promedio = promedio_por_genero(lista_personajes,'M')
+            print(f"Altura promedio masculino {promedio}")
+        case 17:
+            promedio = promedio_por_genero(lista_personajes,'F')
+            print(f"Altura promedio femenino {promedio}")
+        case 18:
+            lista_col = lista_colores_de_ojos(lista_personajes)
+
+            for i in range(len(lista_col)):
+                print(lista_col[i])
+        case 19:
+            lista_col_pelo = lista_colores_de_pelo(lista_personajes)
+            
+            for i in range(len(lista_col_pelo)):
+                print(lista_col_pelo[i])
+
+        
+    opcion = input("\nOtra opcion? S/N:  ")
+    if opcion != 'S' and opcion != 's':
+        break
+    else:
+        system('cls')
 
     
