@@ -188,7 +188,41 @@ def lista_colores_de_pelo(lista_personajes):
 
     return lista_colores_pelo 
     
+
+def lista_inteligencia(lista_personajes):
+    lista_inteli = []
+    existe_tipo_intel = None
+    tipo_inteligencia ={}
     
+    for i in range(len(lista_personajes)):
+            
+            inteligencia = lista_personajes[i]['inteligencia']
+            
+            if i > 0:
+                for j in range(len(lista_inteli)):
+                    existe_tipo_intel = False
+                    if inteligencia.lower() == lista_inteli[j]['inteligencia'].lower():
+                        existe_tipo_intel = True
+                        break 
+
+            if (existe_tipo_intel == False) or (i == 0):
+                
+                    tipo = {'inteligencia': inteligencia, 'cantidad' : 1}
+                   
+                    lista_inteli.append(tipo)
+            else:
+                for k in range(len(lista_inteli)):
+                    if lista_inteli[k]['inteligencia'].lower() == inteligencia.lower():
+                        lista_inteli[k]['cantidad'] += 1
+                        break
+
+            for k in range(len(lista_inteli)):          
+                if lista_inteli[k]['inteligencia'] == "":
+                    lista_inteli[k]['inteligencia'] = 'No tiene'
+            
+
+
+    return lista_inteli 
 
 
 while True:
@@ -212,6 +246,7 @@ while True:
     print("17- Altura promedio de genero Femenino.")
     print("18- Colores de ojos")
     print("19- Colores de pelo")
+    print("20- Tipos de inteligencia")
     
     opcion = int(input("Ingrese un valor: "))
     #if opcion<=50 and opcion>=0:
@@ -275,6 +310,11 @@ while True:
             
             for i in range(len(lista_col_pelo)):
                 print(lista_col_pelo[i])
+        case 20:
+            lista_inteligencia_personajes = lista_inteligencia(lista_personajes)
+            
+            for i in range(len(lista_inteligencia_personajes)):
+                print(lista_inteligencia_personajes[i])
 
         
     opcion = input("\nOtra opcion? S/N:  ")
