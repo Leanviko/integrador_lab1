@@ -61,8 +61,6 @@ def mas_pesado(lista_personajes):
             posicion_peso_maximo= i
     return posicion_peso_maximo
 
-
-
 def menos_pesado(lista_personajes):
     peso_min = None
     posicion_peso_minimo = 0
@@ -74,7 +72,6 @@ def menos_pesado(lista_personajes):
             alt_min = float(lista_personajes[i]['peso'])
             posicion_peso_min = i
     return posicion_peso_minimo
-
 
 
 def nombres_genero(lista_personajes, genero):
@@ -99,7 +96,6 @@ def max_altura_genero(lista_personajes, genero):
     
     posicion_max = altura_maxima(altura_genero)
     print(f"Superheroe de genero {genero} con mayor altura {altura_genero[posicion_max]['nombre']} con altura {altura_genero[posicion_max]['altura']}")
-
 
 def min_altura_genero(lista_personajes, genero):
     altura_genero=[]
@@ -160,7 +156,6 @@ def lista_colores_de_ojos(lista_personajes):
 
     return lista_colores_ojos
 
-
 def lista_colores_de_pelo(lista_personajes):
     lista_colores_pelo = []
     existe_color = None
@@ -187,7 +182,6 @@ def lista_colores_de_pelo(lista_personajes):
                         break
 
     return lista_colores_pelo 
-    
 
 def lista_inteligencia(lista_personajes):
     lista_inteli = []
@@ -208,7 +202,6 @@ def lista_inteligencia(lista_personajes):
             if (existe_tipo_intel == False) or (i == 0):
                 
                     tipo = {'inteligencia': inteligencia, 'cantidad' : 1}
-                   
                     lista_inteli.append(tipo)
             else:
                 for k in range(len(lista_inteli)):
@@ -224,9 +217,77 @@ def lista_inteligencia(lista_personajes):
 
     return lista_inteli 
 
+def diccionario_colores_de_ojos_nombres(lista_personajes):
+    dict_principal = {}
+    existe_color = None
+    
+    
+    for i in range(len(lista_personajes)):
+            color = lista_personajes[i]['color_ojos'].capitalize()
+            
+            if i > 0:
+                    existe_color = False
+                    if color in dict_principal:
+                        existe_color = True
+
+            if (existe_color == False) or (i == 0):
+                dict_principal[color] = [lista_personajes[i]['nombre']]
+            else:
+                if color in dict_principal:
+                        dict_principal[color].append(lista_personajes[i]['nombre'])
+                        
+
+    return dict_principal
+
+def diccionario_colores_de_pelo_nombres(lista_personajes):
+    dict_principal_pelo = {}
+    existe_color = None
+    
+    for i in range(len(lista_personajes)):
+            color = lista_personajes[i]['color_pelo'].capitalize()
+            
+            if i > 0:
+                    existe_color = False
+                    if color in dict_principal_pelo:
+                        existe_color = True
+
+            if (existe_color == False) or (i == 0):
+                dict_principal_pelo[color] = [lista_personajes[i]['nombre']]
+            else:
+                if color in dict_principal_pelo:
+                        dict_principal_pelo[color].append(lista_personajes[i]['nombre'])
+                        
+
+    return dict_principal_pelo
+
+def diccionario_inteligencia_nombres(lista_personajes):
+    dict_principal_inteligencia = {}
+    existe_inteligencia = None
+    
+    for i in range(len(lista_personajes)):
+            
+            tipo_intel = lista_personajes[i]['inteligencia'].capitalize()
+            
+            if tipo_intel == "":
+                tipo_intel = "No tiene"
+
+            if i > 0:
+                    existe_inteligencia = False
+                    if tipo_intel in dict_principal_inteligencia:
+                        existe_inteligencia = True
+
+            if (existe_inteligencia == False) or (i == 0):
+                dict_principal_inteligencia[tipo_intel] = [lista_personajes[i]['nombre']]
+            else:
+                if tipo_intel in dict_principal_inteligencia:
+                        dict_principal_inteligencia[tipo_intel].append(lista_personajes[i]['nombre'])
+                        
+
+    return dict_principal_inteligencia
+
 
 while True:
-    print("Base de datos Stark.\n")
+    print("         ====Base de datos Stark====\n")
     print("1- Nombres de pila.")
     print("2- Nombres y altura.")
     print("3- Altura Maxima.")
@@ -247,10 +308,13 @@ while True:
     print("18- Colores de ojos")
     print("19- Colores de pelo")
     print("20- Tipos de inteligencia")
+    print("21- Grupos por color de ojos")
+    print("22- Grupos por color de pelo")
+    print("23- Grupos por nivel de inteligencia")
     
-    opcion = int(input("Ingrese un valor: "))
-    #if opcion<=50 and opcion>=0:
-        #break
+    opcion = int(input("\nIngrese una opción: "))
+    while opcion>23 or opcion<1:
+        opcion = int(input("Ingrese una opción valida: "))
 
     print("\n")
     match opcion:
@@ -315,9 +379,24 @@ while True:
             
             for i in range(len(lista_inteligencia_personajes)):
                 print(lista_inteligencia_personajes[i])
+        case 21:
+            lista = diccionario_colores_de_ojos_nombres(lista_personajes)
 
-        
-    opcion = input("\nOtra opcion? S/N:  ")
+            for k,v in lista.items():
+                print(f"{k} eyes: ",v)
+
+        case 22:
+            lista = diccionario_colores_de_pelo_nombres(lista_personajes)
+
+            for k,v in lista.items():
+                print(f"{k} hair: ",v)
+        case 23:
+            lista = diccionario_inteligencia_nombres(lista_personajes)
+
+            for k,v in lista.items():
+                print(f"Nivel inteligencia {k}: ",v)
+
+    opcion = input("\nDesea ingresar otra opcion? S/N:  ")
     if opcion != 'S' and opcion != 's':
         break
     else:
